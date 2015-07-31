@@ -236,7 +236,12 @@ var IAB = {
             if (isWebViewAvailable) {
                 strUrl = strUrl.replace("ms-appx://", "ms-appx-web://");
             }
-            popup.src = strUrl;
+            
+            if (strUrl.indexOf("data:text/html") != -1) {
+                popup.navigateToString(decodeURIComponent(strUrl.replace("data:text/html", "")));
+            } else {
+                popup.src = strUrl;
+            }
         }
     },
 
